@@ -95,7 +95,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="pn_lugares" max="32767" attributes="0"/>
-          <Component id="pn_terraza" alignment="0" max="32767" attributes="0"/>
+          <Component id="pn_terraza" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -103,7 +103,8 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="pn_lugares" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="pn_terraza" max="32767" attributes="0"/>
+              <Component id="pn_terraza" pref="350" max="32767" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -148,7 +149,7 @@
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="179" max="-2" attributes="0"/>
-                      <Component id="jLabel3" pref="138" max="32767" attributes="0"/>
+                      <Component id="jLabel3" pref="145" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="207" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -183,13 +184,16 @@
               <Color blue="9b" green="c8" red="6e" type="rgb"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="btn_lobbyFocusGained"/>
+          </Events>
 
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="150" max="-2" attributes="0"/>
-                      <Component id="jLabel2" pref="125" max="32767" attributes="0"/>
+                      <Component id="jLabel2" pref="133" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="239" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -320,7 +324,7 @@
             <Property name="borderPainted" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nuevaVentana,regresaNombre"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nuevaVentana"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_mesa2">
@@ -365,6 +369,9 @@
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nuevaVentana"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_mesa4">
           <Properties>
@@ -385,6 +392,9 @@
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nuevaVentana"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_mesa5">
           <Properties>
@@ -405,6 +415,9 @@
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nuevaVentana"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_mesa6">
           <Properties>
@@ -425,6 +438,9 @@
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nuevaVentana"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_mesa7">
           <Properties>
@@ -468,6 +484,9 @@
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nuevaVentana"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_barra">
           <Properties>

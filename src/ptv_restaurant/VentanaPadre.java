@@ -78,7 +78,7 @@ public class VentanaPadre extends javax.swing.JFrame {
             btn_terrazaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(btn_terrazaLayout.createSequentialGroup()
                 .addGap(179, 179, 179)
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
                 .addGap(207, 207, 207))
         );
         btn_terrazaLayout.setVerticalGroup(
@@ -90,6 +90,11 @@ public class VentanaPadre extends javax.swing.JFrame {
         );
 
         btn_lobby.setBackground(new java.awt.Color(110, 200, 155));
+        btn_lobby.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                btn_lobbyFocusGained(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Lato Semibold", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(254, 254, 254));
@@ -102,7 +107,7 @@ public class VentanaPadre extends javax.swing.JFrame {
             btn_lobbyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btn_lobbyLayout.createSequentialGroup()
                 .addGap(150, 150, 150)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
                 .addGap(239, 239, 239))
         );
         btn_lobbyLayout.setVerticalGroup(
@@ -140,7 +145,6 @@ public class VentanaPadre extends javax.swing.JFrame {
         btn_mesa1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nuevaVentana(evt);
-                regresaNombre(evt);
             }
         });
 
@@ -162,6 +166,11 @@ public class VentanaPadre extends javax.swing.JFrame {
         btn_mesa3.setText("T3");
         btn_mesa3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btn_mesa3.setBorderPainted(false);
+        btn_mesa3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nuevaVentana(evt);
+            }
+        });
 
         btn_mesa4.setBackground(new java.awt.Color(222, 67, 78));
         btn_mesa4.setFont(new java.awt.Font("Lato Semibold", 0, 14)); // NOI18N
@@ -169,6 +178,11 @@ public class VentanaPadre extends javax.swing.JFrame {
         btn_mesa4.setText("T4");
         btn_mesa4.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btn_mesa4.setBorderPainted(false);
+        btn_mesa4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nuevaVentana(evt);
+            }
+        });
 
         btn_mesa5.setBackground(new java.awt.Color(108, 109, 236));
         btn_mesa5.setFont(new java.awt.Font("Lato Semibold", 0, 14)); // NOI18N
@@ -176,6 +190,11 @@ public class VentanaPadre extends javax.swing.JFrame {
         btn_mesa5.setText("T5");
         btn_mesa5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btn_mesa5.setBorderPainted(false);
+        btn_mesa5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nuevaVentana(evt);
+            }
+        });
 
         btn_mesa6.setBackground(btn_mesa1.getBackground());
         btn_mesa6.setFont(new java.awt.Font("Lato Semibold", 0, 14)); // NOI18N
@@ -183,6 +202,11 @@ public class VentanaPadre extends javax.swing.JFrame {
         btn_mesa6.setText("T6");
         btn_mesa6.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btn_mesa6.setBorderPainted(false);
+        btn_mesa6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nuevaVentana(evt);
+            }
+        });
 
         btn_mesa7.setBackground(btn_mesa1.getBackground());
         btn_mesa7.setFont(new java.awt.Font("Lato Semibold", 0, 14)); // NOI18N
@@ -202,6 +226,11 @@ public class VentanaPadre extends javax.swing.JFrame {
         btn_mesa8.setText("T8");
         btn_mesa8.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btn_mesa8.setBorderPainted(false);
+        btn_mesa8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nuevaVentana(evt);
+            }
+        });
 
         btn_barra.setBackground(new java.awt.Color(235, 191, 109));
         btn_barra.setFont(new java.awt.Font("Lato Semibold", 0, 14)); // NOI18N
@@ -310,7 +339,8 @@ public class VentanaPadre extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(pn_lugares, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pn_terraza, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(pn_terraza, javax.swing.GroupLayout.PREFERRED_SIZE, 350, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -318,26 +348,25 @@ public class VentanaPadre extends javax.swing.JFrame {
 
     private void nuevaVentana(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevaVentana
         
-        pn_terraza.setVisible(false);
-        pn_lugares.setVisible(false);
         //Se agrega nueva ventana hija
         JInternalFrame vHija =
-                new JInternalFrame("orden de trabajo", true, true, true, true);
-        
+        new JInternalFrame("orden de trabajo", true, true, true, true);
+
         //Se crea el panel interno
-        PanelHijo hijo = new PanelHijo();
+        PanelHijo hijo = new PanelHijo(pn_terraza);
         // Se agregan propiedades de la ventana hijo
-            vHija.add(hijo);
-            vHija.pack();
-            vHija.setVisible(true);
+        vHija.add(hijo);
+        vHija.pack();
+        vHija.setLocation(100, 100);
+        vHija.setVisible(true);
         //Agregamos la ventana hija al escritorio
         escritorio.add(vHija);
-        
+        pn_terraza.setVisible(false);
     }//GEN-LAST:event_nuevaVentana
 
-    private void regresaNombre(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresaNombre
-        
-    }//GEN-LAST:event_regresaNombre
+    private void btn_lobbyFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btn_lobbyFocusGained
+        pn_terraza.setVisible(true);
+    }//GEN-LAST:event_btn_lobbyFocusGained
 
     /**
      * @param args the command line arguments
