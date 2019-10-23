@@ -14,9 +14,10 @@ import javax.swing.JInternalFrame;
  * @author ceo_emmanuel
  */
 public class VentanaPadre extends javax.swing.JFrame {
+
     JDesktopPane escritorio;
     String nombreMesaOprimida;
-    JInternalFrame mesasOcupadas [];
+
     public VentanaPadre() {
         //Inicializamos la variable de escritorio
         escritorio = new JDesktopPane();
@@ -24,14 +25,13 @@ public class VentanaPadre extends javax.swing.JFrame {
         mesasOcupadas = new JInternalFrame[8];
         //Seteamos al escriotorio como un contenedor de paneles
         this.setContentPane(escritorio);
-        
+
         //Forzamos a que se calcule el tamaño de todos los elementos
         this.pack();
-        
+
         initComponents();
-        
+
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -356,40 +356,61 @@ public class VentanaPadre extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private JInternalFrame mesasOcupadas[];
+
     private void nuevaVentana(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevaVentana
-        
+
+        int j = 0;
         //Se iconifican todas las ventanas abiertas
-        for(JInternalFrame i: escritorio.getAllFrames()){
+        for (JInternalFrame i : escritorio.getAllFrames()) {
             try {
                 i.setIcon(true);
             } catch (PropertyVetoException ex) {
                 Logger.getLogger(VentanaPadre.class.getName()).log(Level.SEVERE, null, ex);
             }
+            mesasOcupadas[j] = i;
         }
-        
-        //Se agrega nueva ventana hija
-        JInternalFrame vHija =
-            new JInternalFrame("orden de trabajo", true, true, true, true);
+        //Comprobamos si existe mesa
+        boolean existe = existeMesa();
+        if (!existe) {
+            //Se agrega nueva ventana hija
+            JInternalFrame vHija
+                    = new JInternalFrame("orden de trabajo", true, true, true, true);
 
-        //Se crea el panel interno
-        PanelHijo hijo = new PanelHijo(pn_terraza);
-        // Se agregan propiedades de la ventana hijo
+            //Se crea el panel interno
+            PanelHijo hijo = new PanelHijo(pn_terraza);
+            // Se agregan propiedades de la ventana hijo
             vHija.add(hijo);
             vHija.pack();
             vHija.setLocation(100, 100);
             vHija.setVisible(true);
-            //Se recupera el texto de botón
+            //Se recupera el texto de botón para ponerlo al titulo de la ventana hija
             String nombreMesa = ((JButton) evt.getSource()).getText();
             vHija.setTitle(nombreMesa);
-        //Agregamos la ventana hija al escritorio
-        
-        escritorio.add(vHija);
-        pn_terraza.setVisible(false);
-    }//GEN-LAST:event_nuevaVentana
+            //Agregamos la ventana hija al escritorio
 
-    /**
-     * @param args the command line arguments
-     */
+            escritorio.add(vHija);
+            pn_terraza.setVisible(false);
+        }
+    }//GEN-LAST:event_nuevaVentana
+    private boolean existeMesa() {
+        //Para iterar la lista te ventanas
+        int j = 0;
+        for (JInternalFrame i : escritorio.getAllFrames()) {
+            //Checamos el titulo de cada internalFrame
+            if (i.getTitle().equalsIgnoreCase(mesasOcupadas[j].getTitle())) {
+                try {
+                    mesasOcupadas[j].setIcon(false);
+                } catch (PropertyVetoException ex) {
+                    Logger.getLogger(VentanaPadre.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                return true;
+            }
+            j++;
+        }
+        return false;
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -449,4 +470,5 @@ public class VentanaPadre extends javax.swing.JFrame {
     private javax.swing.JPanel pn_lugares;
     private javax.swing.JPanel pn_terraza;
     // End of variables declaration//GEN-END:variables
+
 }
