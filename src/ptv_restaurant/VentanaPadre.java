@@ -1,6 +1,11 @@
 package ptv_restaurant;
 
 import java.awt.Dimension;
+import java.beans.PropertyVetoException;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
 
@@ -11,10 +16,12 @@ import javax.swing.JInternalFrame;
 public class VentanaPadre extends javax.swing.JFrame {
     JDesktopPane escritorio;
     String nombreMesaOprimida;
+    JInternalFrame mesasOcupadas [];
     public VentanaPadre() {
         //Inicializamos la variable de escritorio
         escritorio = new JDesktopPane();
-        
+        //Inicializamos mesasOcupadas
+        mesasOcupadas = new JInternalFrame[8];
         //Seteamos al escriotorio como un contenedor de paneles
         this.setContentPane(escritorio);
         
@@ -50,6 +57,7 @@ public class VentanaPadre extends javax.swing.JFrame {
         btn_mesa7 = new javax.swing.JButton();
         btn_mesa8 = new javax.swing.JButton();
         btn_barra = new javax.swing.JButton();
+        btn_regresar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menNuevaOrden = new javax.swing.JMenuItem();
@@ -90,11 +98,6 @@ public class VentanaPadre extends javax.swing.JFrame {
         );
 
         btn_lobby.setBackground(new java.awt.Color(110, 200, 155));
-        btn_lobby.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                btn_lobbyFocusGained(evt);
-            }
-        });
 
         jLabel2.setFont(new java.awt.Font("Lato Semibold", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(254, 254, 254));
@@ -239,6 +242,8 @@ public class VentanaPadre extends javax.swing.JFrame {
         btn_barra.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btn_barra.setBorderPainted(false);
 
+        btn_regresar.setText("Regresar");
+
         javax.swing.GroupLayout pn_terrazaLayout = new javax.swing.GroupLayout(pn_terraza);
         pn_terraza.setLayout(pn_terrazaLayout);
         pn_terrazaLayout.setHorizontalGroup(
@@ -260,15 +265,20 @@ public class VentanaPadre extends javax.swing.JFrame {
                     .addComponent(btn_mesa6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(108, 108, 108))
             .addGroup(pn_terrazaLayout.createSequentialGroup()
-                .addGap(159, 159, 159)
+                .addContainerGap()
+                .addComponent(btn_regresar)
+                .addGap(81, 81, 81)
                 .addComponent(btn_barra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(164, 164, 164))
         );
         pn_terrazaLayout.setVerticalGroup(
             pn_terrazaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_terrazaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btn_barra, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pn_terrazaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pn_terrazaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btn_barra, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_regresar))
                 .addGroup(pn_terrazaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pn_terrazaLayout.createSequentialGroup()
                         .addGap(31, 31, 31)
@@ -348,25 +358,34 @@ public class VentanaPadre extends javax.swing.JFrame {
 
     private void nuevaVentana(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevaVentana
         
+        //Se iconifican todas las ventanas abiertas
+        for(JInternalFrame i: escritorio.getAllFrames()){
+            try {
+                i.setIcon(true);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(VentanaPadre.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
         //Se agrega nueva ventana hija
         JInternalFrame vHija =
-        new JInternalFrame("orden de trabajo", true, true, true, true);
+            new JInternalFrame("orden de trabajo", true, true, true, true);
 
         //Se crea el panel interno
         PanelHijo hijo = new PanelHijo(pn_terraza);
         // Se agregan propiedades de la ventana hijo
-        vHija.add(hijo);
-        vHija.pack();
-        vHija.setLocation(100, 100);
-        vHija.setVisible(true);
+            vHija.add(hijo);
+            vHija.pack();
+            vHija.setLocation(100, 100);
+            vHija.setVisible(true);
+            //Se recupera el texto de botón
+            String nombreMesa = ((JButton) evt.getSource()).getText();
+            vHija.setTitle(nombreMesa);
         //Agregamos la ventana hija al escritorio
+        
         escritorio.add(vHija);
         pn_terraza.setVisible(false);
     }//GEN-LAST:event_nuevaVentana
-
-    private void btn_lobbyFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btn_lobbyFocusGained
-        pn_terraza.setVisible(true);
-    }//GEN-LAST:event_btn_lobbyFocusGained
 
     /**
      * @param args the command line arguments
@@ -414,6 +433,7 @@ public class VentanaPadre extends javax.swing.JFrame {
     private javax.swing.JButton btn_mesa6;
     private javax.swing.JButton btn_mesa7;
     private javax.swing.JButton btn_mesa8;
+    private javax.swing.JButton btn_regresar;
     private javax.swing.JPanel btn_terraza;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
