@@ -327,6 +327,11 @@ public class VentanaPadre extends javax.swing.JFrame {
         jMenu4.setText("About");
 
         jMenuItem4.setText("Sobre papayon's");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem4);
 
         jMenuBar1.add(jMenu4);
@@ -390,6 +395,10 @@ public class VentanaPadre extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_nuevaVentana
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

@@ -1,9 +1,6 @@
 
 package datos;
 
-import java.util.ArrayList;
-
-
 public class Cliente {
     private int id;
     private String nombre;
