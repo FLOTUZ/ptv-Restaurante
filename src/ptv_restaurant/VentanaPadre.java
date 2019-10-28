@@ -1,10 +1,9 @@
 package ptv_restaurant;
 
-import java.awt.Dimension;
+import datos.Cliente;
+import datos.Productos;
 import java.beans.PropertyVetoException;
-import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
@@ -17,12 +16,17 @@ public class VentanaPadre extends javax.swing.JFrame {
 
     JDesktopPane escritorio;
     String nombreMesaOprimida;
-
+    private ArrayList<Productos> productos;
+    private int folio;
+    private ArrayList <Cliente> clientes;
+    
     public VentanaPadre() {
+        llenarBD();
+
         //Inicializamos la variable de escritorio
         escritorio = new JDesktopPane();
         //Inicializamos mesasOcupadas
-        mesasOcupadas = new JInternalFrame[8];
+        mesasOcupadas = new ArrayList<>();
         //Seteamos al escriotorio como un contenedor de paneles
         this.setContentPane(escritorio);
 
@@ -57,7 +61,6 @@ public class VentanaPadre extends javax.swing.JFrame {
         btn_mesa7 = new javax.swing.JButton();
         btn_mesa8 = new javax.swing.JButton();
         btn_barra = new javax.swing.JButton();
-        btn_regresar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menNuevaOrden = new javax.swing.JMenuItem();
@@ -242,8 +245,6 @@ public class VentanaPadre extends javax.swing.JFrame {
         btn_barra.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         btn_barra.setBorderPainted(false);
 
-        btn_regresar.setText("Regresar");
-
         javax.swing.GroupLayout pn_terrazaLayout = new javax.swing.GroupLayout(pn_terraza);
         pn_terraza.setLayout(pn_terrazaLayout);
         pn_terrazaLayout.setHorizontalGroup(
@@ -256,7 +257,7 @@ public class VentanaPadre extends javax.swing.JFrame {
                     .addComponent(btn_mesa3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(188, 188, 188)
                 .addGroup(pn_terrazaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btn_mesa5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_mesa5, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
                     .addComponent(btn_mesa4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(209, 209, 209)
                 .addGroup(pn_terrazaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,20 +266,15 @@ public class VentanaPadre extends javax.swing.JFrame {
                     .addComponent(btn_mesa6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(108, 108, 108))
             .addGroup(pn_terrazaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btn_regresar)
-                .addGap(81, 81, 81)
+                .addGap(160, 160, 160)
                 .addComponent(btn_barra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(164, 164, 164))
         );
         pn_terrazaLayout.setVerticalGroup(
             pn_terrazaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_terrazaLayout.createSequentialGroup()
-                .addGroup(pn_terrazaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pn_terrazaLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btn_barra, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btn_regresar))
+                .addContainerGap()
+                .addComponent(btn_barra, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(pn_terrazaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pn_terrazaLayout.createSequentialGroup()
                         .addGap(31, 31, 31)
@@ -348,68 +344,52 @@ public class VentanaPadre extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(pn_lugares, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pn_terraza, javax.swing.GroupLayout.PREFERRED_SIZE, 350, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(2, 2, 2)
+                .addComponent(pn_terraza, javax.swing.GroupLayout.PREFERRED_SIZE, 349, Short.MAX_VALUE)
+                .addGap(38, 38, 38))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private JInternalFrame mesasOcupadas[];
+    private ArrayList<JInternalFrame> mesasOcupadas;
 
     private void nuevaVentana(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevaVentana
+        folio ++;
+        boolean existe = false;
 
-        int j = 0;
-        //Se iconifican todas las ventanas abiertas
-        for (JInternalFrame i : escritorio.getAllFrames()) {
-            try {
-                i.setIcon(true);
-            } catch (PropertyVetoException ex) {
-                Logger.getLogger(VentanaPadre.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            mesasOcupadas[j] = i;
-        }
-        //Comprobamos si existe mesa
-        boolean existe = existeMesa();
-        if (!existe) {
+        if (existe == false) {
+
             //Se agrega nueva ventana hija
-            JInternalFrame vHija
-                    = new JInternalFrame("orden de trabajo", true, true, true, true);
-
+            JInternalFrame vHija = new JInternalFrame("orden de trabajo", true, true, true, true);
             //Se crea el panel interno
-            PanelHijo hijo = new PanelHijo(pn_terraza);
+            PanelHijo hijo = new PanelHijo(pn_terraza, productos ,folio, clientes);
+
             // Se agregan propiedades de la ventana hijo
             vHija.add(hijo);
             vHija.pack();
-            vHija.setLocation(100, 100);
+            vHija.setLocation(0, 53);
             vHija.setVisible(true);
             //Se recupera el texto de botón para ponerlo al titulo de la ventana hija
             String nombreMesa = ((JButton) evt.getSource()).getText();
             vHija.setTitle(nombreMesa);
-            //Agregamos la ventana hija al escritorio
+            System.out.println(nombreMesa);
+            vHija.setIconifiable(false);
+            vHija.setClosable(false);
 
             escritorio.add(vHija);
             pn_terraza.setVisible(false);
+            //Se pone en una lista de mesas ocupadas
+            mesasOcupadas.add(vHija);
+
+            try {
+                //Agregamos la ventana hija al escritorio
+                hijo.mini(vHija, escritorio);
+            } catch (PropertyVetoException ex) {
+                System.out.println("No hay más ventanas abiertas");
+            }
         }
     }//GEN-LAST:event_nuevaVentana
-    private boolean existeMesa() {
-        //Para iterar la lista te ventanas
-        int j = 0;
-        for (JInternalFrame i : escritorio.getAllFrames()) {
-            //Checamos el titulo de cada internalFrame
-            if (i.getTitle().equalsIgnoreCase(mesasOcupadas[j].getTitle())) {
-                try {
-                    mesasOcupadas[j].setIcon(false);
-                } catch (PropertyVetoException ex) {
-                    Logger.getLogger(VentanaPadre.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                return true;
-            }
-            j++;
-        }
-        return false;
-    }
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -454,7 +434,6 @@ public class VentanaPadre extends javax.swing.JFrame {
     private javax.swing.JButton btn_mesa6;
     private javax.swing.JButton btn_mesa7;
     private javax.swing.JButton btn_mesa8;
-    private javax.swing.JButton btn_regresar;
     private javax.swing.JPanel btn_terraza;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -470,5 +449,45 @@ public class VentanaPadre extends javax.swing.JFrame {
     private javax.swing.JPanel pn_lugares;
     private javax.swing.JPanel pn_terraza;
     // End of variables declaration//GEN-END:variables
+
+    private void llenarBD() {
+        productos = new ArrayList<>();
+        folio = 0;
+        clientes = new ArrayList<>();
+
+        Productos pizza = new Productos(0, "pizza", 100, 175.0);
+        Productos hamburguesa = new Productos(1, "hamburguesa", 100, 50.0);
+        Productos cafe = new Productos(2, "cafe", 200, 25.0);
+        Productos alitas = new Productos(3, "alitas", 100, 10.0);
+        Productos mole = new Productos(4, "mole", 50, 25.0);
+        Productos nachos = new Productos(5, "nachos", 100, 25.0);
+        Productos pastel = new Productos(6, "pastel", 50, 30.0);
+        Productos cerveza = new Productos(7, "cerveza", 200, 18.0);
+
+            productos.add(pizza);
+            productos.add(hamburguesa);
+            productos.add(cafe);
+            productos.add(alitas);
+            productos.add(mole);
+            productos.add(nachos);
+            productos.add(pastel);
+            productos.add(cerveza);
+
+        System.out.println("Hay: "+productos.size() + " productos");
+        
+        Cliente emmanuel = new Cliente(0, "Emmanuel", "EUPE1998");
+        Cliente alexia = new Cliente(1, "Alexia", "2006");
+        Cliente isla = new Cliente(2, "Isla", "2003");
+        Cliente aaron = new Cliente(3, "Aarón", "1999");
+        Cliente sarahi = new Cliente(4, "Sarahí", "SUQV2000");
+        
+            clientes.add(emmanuel);
+            clientes.add(alexia);
+            clientes.add(isla);
+            clientes.add(aaron);
+            clientes.add(sarahi);
+            
+        System.out.println("Hay: "+clientes.size() + " clientes");
+    }
 
 }

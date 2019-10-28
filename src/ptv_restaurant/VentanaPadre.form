@@ -102,9 +102,9 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="pn_lugares" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="pn_terraza" pref="350" max="32767" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+              <Component id="pn_terraza" pref="349" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -244,7 +244,7 @@
                   </Group>
                   <EmptySpace min="-2" pref="188" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="btn_mesa5" max="32767" attributes="0"/>
+                      <Component id="btn_mesa5" pref="356" max="32767" attributes="0"/>
                       <Component id="btn_mesa4" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="209" max="-2" attributes="0"/>
@@ -256,9 +256,7 @@
                   <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btn_regresar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="160" max="-2" attributes="0"/>
                   <Component id="btn_barra" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="164" max="-2" attributes="0"/>
               </Group>
@@ -267,13 +265,8 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btn_barra" min="-2" pref="33" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="btn_regresar" alignment="0" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btn_barra" min="-2" pref="33" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
@@ -510,11 +503,6 @@
               </Border>
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="btn_regresar">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Regresar"/>
           </Properties>
         </Component>
       </SubComponents>
