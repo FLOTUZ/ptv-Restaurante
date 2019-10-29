@@ -69,7 +69,7 @@ public class VentanaPadre extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        sobreNosotros = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -326,13 +326,13 @@ public class VentanaPadre extends javax.swing.JFrame {
 
         jMenu4.setText("About");
 
-        jMenuItem4.setText("Sobre papayon's");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        sobreNosotros.setText("Sobre papayon's");
+        sobreNosotros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                sobreNosotrosActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem4);
+        jMenu4.add(sobreNosotros);
 
         jMenuBar1.add(jMenu4);
 
@@ -380,7 +380,7 @@ public class VentanaPadre extends javax.swing.JFrame {
             vHija.setTitle(nombreMesa);
             System.out.println(nombreMesa);
             vHija.setIconifiable(false);
-            vHija.setClosable(false);
+            vHija.setClosable(true);
 
             escritorio.add(vHija);
             pn_terraza.setVisible(false);
@@ -396,9 +396,19 @@ public class VentanaPadre extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_nuevaVentana
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void sobreNosotrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sobreNosotrosActionPerformed
+        pn_terraza.setVisible(false);
+        JInternalFrame vHija = new JInternalFrame("Sobre nosotros", true, true, true, true);
+        SobreNosotros hijo = new SobreNosotros();
         
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+        vHija.add(hijo);
+        vHija.pack();
+        vHija.setLocation(200,80);
+        vHija.setVisible(true);
+        escritorio.add(vHija);
+        pn_terraza.setVisible(true);
+        escritorio.getDesktopManager().activateFrame(vHija);
+    }//GEN-LAST:event_sobreNosotrosActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -453,10 +463,10 @@ public class VentanaPadre extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem menNuevaOrden;
     private javax.swing.JPanel pn_lugares;
     private javax.swing.JPanel pn_terraza;
+    private javax.swing.JMenuItem sobreNosotros;
     // End of variables declaration//GEN-END:variables
 
     private void llenarBD() {
